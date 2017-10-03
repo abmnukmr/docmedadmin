@@ -9,8 +9,6 @@ import {LocationProvider} from "../../providers/location/location";
 })
 export class HomePage {
 
-  @ViewChild(Content)
-  content:Content;
   scr:any;
   data:any;
   // Necessary for the change() method below
@@ -40,11 +38,6 @@ export class HomePage {
 
 
 
-  ngAfterViewInit() {
-    this.content.ionScrollEnd.subscribe((data)=>{
-      //... do things
-    });
-  }
 
 
   Scrolltop(){

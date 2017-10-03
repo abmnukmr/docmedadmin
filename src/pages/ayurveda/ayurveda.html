@@ -23,6 +23,8 @@
         <ion-icon name="pin" color="primary"></ion-icon>
         <p margin-left="0.1%">{{ item.address}}</p>
       </ion-row>
+      <p style="color:#36b4f9;" item-end [hidden]="item.show=='true'?true:false">Enable</p>
+      <p style="color: #f31005" item-end [hidden]="item.show=='false'?true:false">Disable</p>
 
     </ion-item>
 

@@ -16,6 +16,10 @@
           <h6 margin-left="0.01%">{{ item.address}}</h6>
         </ion-row>
       </div>
+
+      <p style="color:#36b4f9;" item-end [hidden]="item.show=='true'?true:false">Enable</p>
+      <p style="color: #f31005" item-end [hidden]="item.show=='false'?true:false">Disable</p>
+
     </ion-item>
 
 
