@@ -1,28 +1,33 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {Http} from "@angular/http";
 import {LocationProvider} from "../../providers/location/location";
 
+/**
+ * Generated class for the PathalogyPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html'
+  selector: 'page-pathalogy',
+  templateUrl: 'pathalogy.html',
 })
-export class AboutPage {
+export class PathalogyPage {
+
 
   lati:any;
   lngi:any;
   data:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public Loc:LocationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http,public Loc:LocationProvider) {
 
 
-
-    console.log("Abhimnayu");
-
-    this.load(this.Loc.lat,this.Loc.lng);
+    this.load(this.Loc.lat,this.Loc.lng)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChemistPage');
+    console.log('ionViewDidLoad PathalogyPage');
   }
 
 
@@ -33,7 +38,7 @@ export class AboutPage {
 
       return new Promise(resolve => {
 
-        this.http.get('https://quiet-ridge-46090.herokuapp.com/chemist/list').map(res => res.json()).subscribe(data => {
+        this.http.get('https://quiet-ridge-46090.herokuapp.com/pathalogy/list').map(res => res.json()).subscribe(data => {
 
           this.data = this.applyHaversine(data,lati,lngi);
 
@@ -51,7 +56,7 @@ export class AboutPage {
 
     return new Promise(resolve => {
 
-      this.http.get('https://quiet-ridge-46090.herokuapp.com/chemist/list').map(res => res.json()).subscribe(data => {
+      this.http.get('https://quiet-ridge-46090.herokuapp.com/pathalogy/list').map(res => res.json()).subscribe(data => {
 
         this.data = this.applyHaversine(data,lati,lngi);
 
@@ -126,13 +131,10 @@ export class AboutPage {
 
 
 
- hide(){
 
- }
-
- show(){
-
- }
 
 
 }
+
+
+

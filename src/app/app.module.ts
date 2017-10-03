@@ -10,6 +10,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {AyurvedaPage} from "../pages/ayurveda/ayurveda";
+import {HomeopathyPage} from "../pages/homeopathy/homeopathy";
+import {PathalogyPage} from "../pages/pathalogy/pathalogy";
+import {HttpModule} from "@angular/http";
+import { LocationProvider } from '../providers/location/location';
+import {BackgroundGeolocation} from "@ionic-native/background-geolocation";
+import {Geolocation} from "@ionic-native/geolocation";
 
 @NgModule({
   declarations: [
@@ -17,10 +24,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    AyurvedaPage,
+    HomeopathyPage,
+    PathalogyPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -29,12 +41,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    AyurvedaPage,
+    HomeopathyPage,
+    PathalogyPage
   ],
   providers: [
     StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SplashScreen, BackgroundGeolocation,Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LocationProvider
   ]
 })
 export class AppModule {}

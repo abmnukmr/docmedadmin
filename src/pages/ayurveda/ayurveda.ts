@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Http} from "@angular/http";
+import {  NavController, NavParams } from 'ionic-angular';
 import {LocationProvider} from "../../providers/location/location";
+import {Http} from "@angular/http";
+
+/**
+ * Generated class for the AyurvedaPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html'
+  selector: 'page-ayurveda',
+  templateUrl: 'ayurveda.html',
 })
-export class AboutPage {
+export class AyurvedaPage {
 
-  lati:any;
-  lngi:any;
   data:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public Loc:LocationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http,public Loc:LocationProvider) {
 
 
-
-    console.log("Abhimnayu");
-
-    this.load(this.Loc.lat,this.Loc.lng);
+    this.load(this.Loc.lat,this.Loc.lng)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChemistPage');
+    console.log('ionViewDidLoad AyurvedalistPage');
   }
-
 
   load(lati,lngi)
   {
@@ -33,7 +34,7 @@ export class AboutPage {
 
       return new Promise(resolve => {
 
-        this.http.get('https://quiet-ridge-46090.herokuapp.com/chemist/list').map(res => res.json()).subscribe(data => {
+        this.http.get('https://quiet-ridge-46090.herokuapp.com/ayurveda/list').map(res => res.json()).subscribe(data => {
 
           this.data = this.applyHaversine(data,lati,lngi);
 
@@ -51,7 +52,7 @@ export class AboutPage {
 
     return new Promise(resolve => {
 
-      this.http.get('https://quiet-ridge-46090.herokuapp.com/chemist/list').map(res => res.json()).subscribe(data => {
+      this.http.get('https://quiet-ridge-46090.herokuapp.com/ayurveda/list').map(res => res.json()).subscribe(data => {
 
         this.data = this.applyHaversine(data,lati,lngi);
 
@@ -126,13 +127,7 @@ export class AboutPage {
 
 
 
- hide(){
 
- }
-
- show(){
-
- }
 
 
 }
