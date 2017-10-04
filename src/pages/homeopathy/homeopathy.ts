@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
-import {Http} from "@angular/http";
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {Http, RequestOptions,Headers} from "@angular/http";
 import {LocationProvider} from "../../providers/location/location";
 
 /**
@@ -17,7 +17,12 @@ import {LocationProvider} from "../../providers/location/location";
 export class HomeopathyPage {
 
   data:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http,public Loc:LocationProvider) {
+  update:any;
+  loading:any;
+  constructor(public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams,public http:Http,public Loc:LocationProvider) {
+    this.loading = this.loadingCtrl.create({
+      content:"wait..."
+    });
 
 
     this.load(this.Loc.lat,this.Loc.lng)
@@ -125,6 +130,70 @@ export class HomeopathyPage {
 
   }
 
+
+  hide(em){
+    this.loading.present();
+
+    this.update = {
+      "name":"xxxxxxx",
+      "age":"xxxxx",
+      "sex":"xxxxx",
+      "phone":"xxxxx"
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers:headers});
+
+    this.http.post("https://quiet-ridge-46090.herokuapp.com/hide/homeo/" + em, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss()
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+
+        this.load(this.Loc.lat,this.Loc.lng);
+      this.loading.dismiss()
+
+      console.log("Error!:", err);
+    });
+
+
+  }
+
+  show(em){
+    this.loading.present();
+
+    this.update = {
+      "name":"xxxxxxx",
+      "age":"xxxxx",
+      "sex":"xxxxx",
+      "phone":"xxxxx"
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers:headers});
+
+    this.http.post("https://quiet-ridge-46090.herokuapp.com/show/homeo/" + em, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      console.log(data)
+      this.loading.dismiss()
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+      console.log("Error!:", err);
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss()
+    });
+
+  }
 
 }
 

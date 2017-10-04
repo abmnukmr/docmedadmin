@@ -23,8 +23,10 @@
         <p margin-left="0.1%">{{ item.address}}</p>
       </ion-row>
 
-      <p style="color:#36b4f9;" item-end [hidden]="item.show=='true'?true:false">Enable</p>
-      <p style="color: #f31005" item-end [hidden]="item.show=='false'?true:false">Disable</p>
+
+      <p margin-left="0.1%">{{ item.email}}</p>
+      <p style="color:#36b4f9;" item-end [hidden]="item.show=='true'?true:false" (click)="show(item.email)">Enable</p>
+      <p style="color: #f31005" item-end [hidden]="item.show=='false'?true:false" (click)="hide(item.email)">Disable</p>
 
     </ion-item>
 

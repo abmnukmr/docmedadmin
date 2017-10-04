@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content, NavController, NavParams} from 'ionic-angular';
-import {Http} from "@angular/http";
+import {Content, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {Http, RequestOptions,Headers} from "@angular/http";
 import {LocationProvider} from "../../providers/location/location";
 
 @Component({
@@ -10,10 +10,17 @@ import {LocationProvider} from "../../providers/location/location";
 export class HomePage {
 
   scr:any;
+  update:any;
   data:any;
+  loading:any;
+
   // Necessary for the change() method below
   shovaL:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public Loc:LocationProvider) {
+  constructor(public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams,public http: Http,public Loc:LocationProvider) {
+
+    this.loading = this.loadingCtrl.create({
+      content:"wait..."
+    });
 
     this.shovaL=this.navParams.get("cata")
 
@@ -149,6 +156,69 @@ export class HomePage {
 
 
 
+
+  hide(em){
+    this.loading.present();
+
+    this.update = {
+      "name":"xxxxxxx",
+      "age":"xxxxx",
+      "sex":"xxxxx",
+      "phone":"xxxxx"
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers:headers});
+
+    this.http.post("https://quiet-ridge-46090.herokuapp.com/hide/doctor/" + em, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss()
+      console.log(data)
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+      console.log("Error!:", err);
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss()
+    });
+
+
+  }
+
+  show(em){
+    this.loading.present();
+
+    this.update = {
+      "name":"xxxxxxx",
+      "age":"xxxxx",
+      "sex":"xxxxx",
+      "phone":"xxxxx"
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers:headers});
+
+    this.http.post("https://quiet-ridge-46090.herokuapp.com/show/doctor/" + em, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss()
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+     this.load(this.Loc.lat,this.Loc.lng);
+
+      console.log("Error!:", err);
+      this.loading.dismiss()
+    });
+
+  }
 
 
 
