@@ -21,6 +21,9 @@ loading:any;
   lngi:any;
   update:any;
   data:any;
+  items:any;
+  filtter:any;
+  title:any;
   constructor(public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams,public http:Http,public Loc:LocationProvider) {
 
     this.loading = this.loadingCtrl.create({
@@ -199,7 +202,73 @@ loading:any;
   }
 
 
+  delete(em){
+    this.loading.present();
 
+    this.update = {
+      "name":"xxxxxxx",
+      "age":"xxxxx",
+      "sex":"xxxxx",
+      "phone":"xxxxx"
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers:headers});
+
+    this.http.post("https://quiet-ridge-46090.herokuapp.com/delete/pathalogy/" + em, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss();
+
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+      this.load(this.Loc.lat,this.Loc.lng);
+
+      this.loading.dismiss();
+
+      console.log("Error!:", err);
+    });
+
+  }
+
+
+  initializeItems(){
+
+    this.items=this.data;
+
+  }
+
+
+  getItems(ev) {
+    //  this.searching = true;
+    // Reset items back to all of the items
+    this.initializeItems();
+    //this.listshow=true;
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+
+
+
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        this.filtter=this.title;
+        console.log(this.filtter);
+        return (item.catagory.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
+
+      })
+    }
+
+
+
+
+  }
 }
 
 

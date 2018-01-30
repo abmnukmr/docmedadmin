@@ -1,0 +1,35 @@
+<!--
+  Generated template for the AuthPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+
+  <ion-navbar>
+    <ion-title> Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding  >
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list>
+    <ion-item *ngIf="!searching">
+      <ion-label color="primary" stacked>ID</ion-label>
+      <ion-input placeholder="ID" [(ngModel)]="ID"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!searching">
+      <ion-label color="primary" stacked>Password</ion-label>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="Password"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+  <button ion-button full block *ngIf="!searching" (click)="login(ID,Password)"> Login</button>
+</ion-content>

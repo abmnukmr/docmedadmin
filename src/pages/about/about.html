@@ -1,14 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      CHEMIST
-    </ion-title>
+
+    <ion-searchbar
+      placeholder="Search...."
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      [animated]="true"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-padding>
   <ion-list>
-    <ion-item  *ngFor="let item of data" >
+    <ion-item  *ngFor="let item of data|search:'name,email':myInput" >
       <h3 style="color: #00baba"><b>{{item.name}}</b></h3>
 
       <ion-row>
@@ -21,6 +26,7 @@
 
       <p style="color:#36b4f9;" item-end [hidden]="item.show=='true'?true:false" (click)="show(item.email)">Enable</p>
       <p style="color: #f31005" item-end [hidden]="item.show=='false'?true:false" (click)="hide(item.email)">Disable</p>
+      <p style="color:#f90b1d;" item-end (click)="delete(item.email)">Delete</p>
 
     </ion-item>
 

@@ -17,6 +17,9 @@ import {HttpModule} from "@angular/http";
 import { LocationProvider } from '../providers/location/location';
 import {BackgroundGeolocation} from "@ionic-native/background-geolocation";
 import {Geolocation} from "@ionic-native/geolocation";
+import {AuthPage} from "../pages/auth/auth";
+import { PassadminProvider } from '../providers/passadmin/passadmin';
+import {SearchPipe} from "../pipes/search/search";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import {Geolocation} from "@ionic-native/geolocation";
     TabsPage,
     AyurvedaPage,
     HomeopathyPage,
-    PathalogyPage
+    PathalogyPage,
+    AuthPage,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -44,13 +49,15 @@ import {Geolocation} from "@ionic-native/geolocation";
     TabsPage,
     AyurvedaPage,
     HomeopathyPage,
-    PathalogyPage
+    PathalogyPage,
+    AuthPage
   ],
   providers: [
     StatusBar,
     SplashScreen, BackgroundGeolocation,Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LocationProvider
+    LocationProvider,
+    PassadminProvider
   ]
 })
 export class AppModule {}
